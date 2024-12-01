@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_policy" {
 resource "aws_iam_openid_connect_provider" "github_oidc" {
   url = "https://token.actions.githubusercontent.com"
   client_id_list = ["sts.amazonaws.com"]
-  thumbprint_list = ["9e99a0f2553e5e2b7e1d3b2339251902ef8a40d6"]
+  thumbprint_list = ["d89e3bd43d5d909b47a18977aa9d5ce36cee184c"]
 }
 
 # IAM Role for OIDC GitHub Actions
@@ -42,7 +42,7 @@ resource "aws_iam_role" "oidc_role" {
         Condition = {
           StringLike = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-            "token.actions.githubusercontent.com:sub" = "repo:your-org/your-repo"
+            "token.actions.githubusercontent.com:sub" = "repo:giridharvedula/springboot-java/*"
           }
         }
       }
