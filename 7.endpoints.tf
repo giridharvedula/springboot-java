@@ -57,4 +57,3 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
     ]
   })
 }
-

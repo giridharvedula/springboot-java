@@ -53,4 +53,3 @@ resource "aws_subnet" "public2_us_east_1b" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 }
-
