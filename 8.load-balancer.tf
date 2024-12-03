@@ -1,3 +1,30 @@
+
+# Target Group Frontend
+resource "aws_lb_target_group" "frontend_tg" {
+  name        = "frontend-tg"
+  port        = 80
+  protocol    = "HTTP"
+  target_type = "ip"
+  vpc_id      = aws_vpc.main.id
+  health_check {
+    protocol = "HTTPS"
+    path     = "/"
+  }
+}
+
+# Target Group Backend
+resource "aws_lb_target_group" "backend_tg" {
+  name        = "backend-tg"
+  port        = 80
+  protocol    = "HTTP"
+  target_type = "ip"
+  vpc_id      = aws_vpc.main.id
+  health_check {
+    protocol = "HTTPS"
+    path     = "/"
+  }
+}
+
 # Load Balancer - Scheme
 resource "aws_lb" "app_alb" {
   name               = "app-alb"
@@ -35,31 +62,5 @@ resource "aws_lb_listener" "https_listener" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.frontend_tg.arn
-  }
-}
-
-# Target Group Frontend
-resource "aws_lb_target_group" "frontend_tg" {
-  name        = "frontend-tg"
-  port        = 80
-  protocol    = "HTTP"
-  target_type = "ip"
-  vpc_id      = aws_vpc.main.id
-  health_check {
-    protocol = "HTTPS"
-    path     = "/"
-  }
-}
-
-# Target Group Backend
-resource "aws_lb_target_group" "backend_tg" {
-  name        = "backend-tg"
-  port        = 80
-  protocol    = "HTTP"
-  target_type = "ip"
-  vpc_id      = aws_vpc.main.id
-  health_check {
-    protocol = "HTTPS"
-    path     = "/"
   }
 }
