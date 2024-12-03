@@ -53,7 +53,7 @@ resource "aws_lb" "app_alb" {
 #  }
 #}
 
-resource "aws_lb_listener" "https_listener" {
+resource "aws_lb_listener" "http_listener" {
   load_balancer_arn = aws_lb.app_alb.arn
 #  port              = 443
    port              = 80
