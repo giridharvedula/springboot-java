@@ -5,7 +5,6 @@ resource "aws_route_table" "public" {
     Name = "rtb-public"
   }
   route = {
-    gateway_id = aws_internet_gateway.gw.id
     cidr_block = "0.0.0.0/0"
   }
 }
