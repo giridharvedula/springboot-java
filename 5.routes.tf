@@ -4,6 +4,7 @@ resource "aws_route_table" "public" {
   tags = {
     Name = "rtb-public"
   }
+  route = [ aws_internet_gateway.gw ]
 }
 
 # Associate the public subnets with the public route table
