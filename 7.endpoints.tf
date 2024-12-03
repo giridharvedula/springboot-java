@@ -7,6 +7,7 @@ resource "aws_vpc_endpoint" "s3" {
     aws_route_table.private2_us_east_1b.id
   ]
   policy = jsonencode({
+    Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
@@ -28,6 +29,7 @@ resource "aws_vpc_endpoint" "ecr_api" {
   ]
   security_group_ids = [aws_security_group.ecs_sg.id]
   policy = jsonencode({
+    Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
@@ -48,6 +50,7 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   ]
   security_group_ids = [aws_security_group.ecs_sg.id]
   policy = jsonencode({
+    Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
