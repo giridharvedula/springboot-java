@@ -2,6 +2,7 @@
 resource "aws_vpc_endpoint" "s3" {
   vpc_id = aws_vpc.main.id
   service_name = "com.amazonaws.us-east-1.s3"
+  vpc_endpoint_type = "Gateway"
   route_table_ids = [
     aws_route_table.private1_us_east_1a.id,
     aws_route_table.private2_us_east_1b.id
@@ -12,6 +13,9 @@ resource "aws_vpc_endpoint" "s3" {
       {
         Effect = "Allow"
         Action = "s3:*"
+        "Principal": {
+          "AWS": "arn:aws:iam::578133268609:role/oidc_role"
+        }
         Resource = "*"
       }
     ]
