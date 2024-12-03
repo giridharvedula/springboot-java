@@ -64,9 +64,9 @@ resource "aws_ecs_service" "frontend_service" {
   }
 }
 
-# ECS Service Frontend
+# ECS Service Backend
 resource "aws_ecs_service" "backend_service" {
-  name            = "frontend-service"
+  name            = "backend-service"
   cluster         = aws_ecs_cluster.app_test.id
   task_definition = aws_ecs_task_definition.backend_task.arn
   desired_count   = 1
