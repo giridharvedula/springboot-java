@@ -39,6 +39,9 @@ resource "aws_vpc_endpoint" "ecr_api" {
         Effect = "Allow"
         Action = "ecr:*"
         Resource = "*"
+        "Principal": {
+          "AWS": "*"
+        }
       }
     ]
   })
@@ -60,6 +63,9 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
         Effect = "Allow"
         Action = "ecr:*"
         Resource = "*"
+        "Principal": {
+          "AWS": "*"
+        }
       }
     ]
   })
