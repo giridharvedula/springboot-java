@@ -64,10 +64,3 @@ resource "aws_lb_listener" "http_listener" {
     target_group_arn = aws_lb_target_group.frontend_tg.arn
   }
 }
-
-resource "aws_lb_listener" "http"
-  load_balancer_arn = aws_lb.app_alb.arn
-  port = 80
-  protocol = "HTTP"
-  type = "forward"
-  target_group_arn = aws_lb_target_group.frontend_tg.arn
