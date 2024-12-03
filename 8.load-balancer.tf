@@ -10,6 +10,9 @@ resource "aws_lb_target_group" "frontend_tg" {
     protocol = "HTTPS"
     path     = "/"
   }
+  tags = {
+    Name = "frontend-tg"
+  }
 }
 
 # Target Group Backend
@@ -22,6 +25,9 @@ resource "aws_lb_target_group" "backend_tg" {
   health_check {
     protocol = "HTTPS"
     path     = "/"
+  }
+  tags = {
+    Name = "backend-tg"
   }
 }
 
@@ -36,6 +42,9 @@ resource "aws_lb" "app_alb" {
     aws_subnet.public2_us_east_1b.id
   ]
   enable_deletion_protection = false
+  tags = {
+    Name = "app-alb"
+  }
 }
 
 # Load Balancer Listeners
@@ -62,5 +71,8 @@ resource "aws_lb_listener" "http_listener" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.frontend_tg.arn
+  }
+  tags = {
+    Name = "http-listener"
   }
 }

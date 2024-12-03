@@ -1,6 +1,9 @@
 # ECS Cluster
 resource "aws_ecs_cluster" "app_test" {
   name = "app-test"
+  tags = {
+    Name = "app-test"
+  }
 }
 
 # ECS Frontend Task Definition
@@ -22,6 +25,9 @@ resource "aws_ecs_task_definition" "frontend_task" {
       protocol      = "tcp"
     }]
   }])
+  tags = {
+    Name = "frontend-task"
+  }
 }
 
 # ECS Backend Task Definition
@@ -43,6 +49,9 @@ resource "aws_ecs_task_definition" "backend_task" {
       protocol      = "tcp"
     }]
   }])
+  tags = {
+    Name = "backend-task"
+  }
 }
 
 # ECS Service Frontend
@@ -63,6 +72,9 @@ resource "aws_ecs_service" "frontend_service" {
     container_port   = 80
   }
   depends_on = [ aws_ecs_task_definition.frontend_task ]
+  tags = {
+    Name = "frontend-service"
+  }
 }
 
 # ECS Service Backend
@@ -83,4 +95,7 @@ resource "aws_ecs_service" "backend_service" {
     container_port   = 80
   }
   depends_on = [ aws_ecs_task_definition.frontend_task ]
+  tags = {
+    Name = "backend-service"
+  }
 }

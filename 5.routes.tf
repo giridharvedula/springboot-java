@@ -4,7 +4,7 @@ resource "aws_route_table" "public" {
   tags = {
     Name = "rtb-public"
   }
-  
+
 }
 
 # Associate the public subnets with the public route table

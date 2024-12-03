@@ -20,6 +20,9 @@ resource "aws_vpc_endpoint" "s3" {
       }
     ]
   })
+  tags = {
+    Name = "s3-endpoint"
+  }
 }
 
 # ECR Serverless Endpoints
@@ -45,6 +48,9 @@ resource "aws_vpc_endpoint" "ecr_api" {
       }
     ]
   })
+  tags = {
+    Name = "ecr-api-endpoint"
+  }
 }
 
 resource "aws_vpc_endpoint" "ecr_dkr" {
@@ -69,4 +75,7 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
       }
     ]
   })
+  tags = {
+    Name = "ecr-dkr-endpoint"
+  }
 }

@@ -19,6 +19,9 @@ resource "aws_security_group" "ecs_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    Name = "ecs-sg"
+  }
 }
 
 # Security Group Application Load Balancer
@@ -43,5 +46,8 @@ resource "aws_security_group" "alb_sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "alb-sg"
   }
 }
