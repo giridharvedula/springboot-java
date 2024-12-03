@@ -62,7 +62,7 @@ resource "aws_ecs_service" "frontend_service" {
     container_name   = "frontend-container"
     container_port   = 80
   }
-  depends_on = [ aws_ecs_task_definition.frontend_task.arn ]
+  depends_on = [ aws_ecs_task_definition.frontend_task ]
 }
 
 # ECS Service Backend
@@ -82,5 +82,5 @@ resource "aws_ecs_service" "backend_service" {
     container_name   = "frontend-container"
     container_port   = 80
   }
-  depends_on = [ aws_ecs_task_definition.frontend_task.arn ]
+  depends_on = [ aws_ecs_task_definition.frontend_task ]
 }
