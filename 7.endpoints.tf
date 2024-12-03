@@ -14,7 +14,7 @@ resource "aws_vpc_endpoint" "s3" {
         Effect = "Allow"
         Action = "s3:*"
         "Principal": {
-          "AWS": "arn:aws:iam::578133268609:*"
+          "AWS": "*"
         }
         Resource = "*"
       }
