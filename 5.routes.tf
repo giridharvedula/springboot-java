@@ -4,9 +4,7 @@ resource "aws_route_table" "public" {
   tags = {
     Name = "rtb-public"
   }
-  route = {
-    cidr_block = "0.0.0.0/0"
-  }
+  
 }
 
 # Associate the public subnets with the public route table
