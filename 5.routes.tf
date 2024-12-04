@@ -3,8 +3,19 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
   route = [
     {
-      "cidr_block" = "0.0.0.0/0",
-      "gateway_id" = aws_internet_gateway.gw.id
+      cidr_block = "0.0.0.0/0",
+      gateway_id = aws_internet_gateway.gw.id,
+      carrier_gateway_id = "",
+      core_network_arn = "",
+      destination_prefix_list_id = "",
+      egress_only_gateway_id = null,
+      ipv6_cidr_block = null,
+      local_gateway_id = null,
+      nat_gateway_id = null,
+      network_interface_id = null,
+      transit_gateway_id = null,
+      vpc_endpoint_id = null,
+      vpc_peering_connection_id = null
     }
   ]
   tags = {
