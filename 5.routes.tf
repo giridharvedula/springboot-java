@@ -6,7 +6,7 @@ resource "aws_route_table" "public" {
   }
   route = [ 
     {
-      gateway_id = aws_internet_gateway.gw,
+      gateway_id = aws_internet_gateway.gw.id,
       cidr_block = "0.0.0.0/0"
     }
    ]
