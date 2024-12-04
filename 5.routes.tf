@@ -5,9 +5,9 @@ resource "aws_route_table" "public" {
     {
       cidr_block = "0.0.0.0/0",
       gateway_id = aws_internet_gateway.gw.id,
-      carrier_gateway_id = "",
-      core_network_arn = "",
-      destination_prefix_list_id = "",
+      carrier_gateway_id = null,
+      core_network_arn = null,
+      destination_prefix_list_id = null,
       egress_only_gateway_id = null,
       ipv6_cidr_block = null,
       local_gateway_id = null,
