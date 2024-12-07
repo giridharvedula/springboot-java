@@ -4,6 +4,7 @@ resource "aws_ecs_cluster" "app_test" {
   tags = {
     Name = "sb-java-app-cluster"
   }
+  depends_on = [ aws_ecr_repository.frontend, aws_ecr_repository.backend ]
 }
 
 # ECS Frontend Task Definition
@@ -16,7 +17,7 @@ resource "aws_ecs_task_definition" "frontend_task" {
   memory                   = "1024"
   container_definitions    = jsonencode([{
     name      = "frontend-container"
-    image     = "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest"
+    image     = "578133268609.dkr.ecr.us-east-1.amazonaws.com/sb-java-ecr-repo-frontend:latest"
     cpu       = 256
     memory    = 512
     essential = true
@@ -28,6 +29,7 @@ resource "aws_ecs_task_definition" "frontend_task" {
   tags = {
     Name = "sb-java-frontend-task"
   }
+  depends_on = [ aws_ecr_repository.frontend ]
 }
 
 # ECS Backend Task Definition
@@ -40,7 +42,7 @@ resource "aws_ecs_task_definition" "backend_task" {
   memory                   = "1024"
   container_definitions    = jsonencode([{
     name      = "sb-java-backend-container"
-    image     = "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest"
+    image     = "578133268609.dkr.ecr.us-east-1.amazonaws.com/sb-java-ecr-repo-backend:latest"
     cpu       = 256
     memory    = 512
     essential = true
@@ -52,6 +54,7 @@ resource "aws_ecs_task_definition" "backend_task" {
   tags = {
     Name = "sb-java-backend-task"
   }
+  depends_on = [ aws_ecr_repository.backend ]
 }
 
 # ECS Service Frontend

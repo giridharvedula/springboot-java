@@ -13,6 +13,7 @@ resource "aws_lb_target_group" "frontend_tg" {
   tags = {
     Name = "sb-java-frontend-tg"
   }
+  depends_on = [ aws_vpc.main ]
 }
 
 # Target Group Backend
@@ -29,6 +30,7 @@ resource "aws_lb_target_group" "backend_tg" {
   tags = {
     Name = "sb-java-backend-tg"
   }
+  depends_on = [ aws_lb_target_group.frontend_tg ]
 }
 
 # Load Balancer - Scheme
@@ -75,4 +77,5 @@ resource "aws_lb_listener" "http_listener" {
   tags = {
     Name = "sb-java-http-listener"
   }
+  depends_on = [ aws_lb.app_alb ]
 }

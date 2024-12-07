@@ -6,6 +6,7 @@ resource "aws_vpc" "main" {
   tags = {
     Name = "sb-java-vpc"
   }
+  depends_on = [ data.aws_availability_zones.available ]
 }
 
 # Subnets in two available zones
@@ -17,6 +18,7 @@ resource "aws_subnet" "private1_us_east_1a" {
   tags = {
     Name = "sb-java-subnet-pvt-us-east-1a"
   }
+  depends_on = [ aws_vpc.main ]
 }
 
 resource "aws_subnet" "private2_us_east_1b" {
@@ -27,6 +29,7 @@ resource "aws_subnet" "private2_us_east_1b" {
   tags = {
     Name = "sb-java-subnet-pvt-us-east-1b"
   }
+  depends_on = [ aws_vpc.main ]
 }
 
 resource "aws_subnet" "public1_us_east_1a" {
@@ -37,6 +40,7 @@ resource "aws_subnet" "public1_us_east_1a" {
   tags = {
     Name = "sb-java-subnet-pub-us-east-1a"
   }
+  depends_on = [ aws_vpc.main ]
 }
 
 resource "aws_subnet" "public2_us_east_1b" {
@@ -47,6 +51,7 @@ resource "aws_subnet" "public2_us_east_1b" {
   tags = {
     Name = "sb-java-subnet-pub-us-east-1b"
   }
+  depends_on = [ aws_vpc.main ]
 }
 
 # Internet Gateway
@@ -55,4 +60,5 @@ resource "aws_internet_gateway" "gw" {
   tags = {
     Name = "sb-java-igw"
   }
+  depends_on = [ aws_vpc.main ]
 }

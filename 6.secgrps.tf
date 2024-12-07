@@ -21,6 +21,7 @@ resource "aws_security_group" "ecs_sg" {
   tags = {
     Name = "sb-java-ecs-sg"
   }
+  depends_on = [ aws_vpc.main ]
 }
 
 # Security Group Application Load Balancer
@@ -49,4 +50,5 @@ resource "aws_security_group" "alb_sg" {
   tags = {
     Name = "sb-java-alb-sg"
   }
+  depends_on = [ aws_vpc.main ]
 }
