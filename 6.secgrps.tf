@@ -9,8 +9,7 @@ resource "aws_security_group" "ecs_sg" {
     protocol    = "tcp"
     cidr_blocks = [
       "10.0.128.0/20",
-      "10.0.144.0/20",
-      "0.0.0.0/0"
+      "10.0.144.0/20"
     ]
   }
   egress {
