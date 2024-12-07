@@ -21,7 +21,7 @@ resource "aws_vpc_endpoint" "s3" {
     ]
   })
   tags = {
-    Name = "s3-endpoint"
+    Name = "sb-java-s3-endpoint"
   }
 }
 
@@ -49,7 +49,7 @@ resource "aws_vpc_endpoint" "ecr_api" {
     ]
   })
   tags = {
-    Name = "ecr-api-endpoint"
+    Name = "sb-java-ecr-api-endpoint"
   }
 }
 
@@ -76,6 +76,6 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
     ]
   })
   tags = {
-    Name = "ecr-dkr-endpoint"
+    Name = "sb-java-ecr-dkr-endpoint"
   }
 }

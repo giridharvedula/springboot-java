@@ -1,6 +1,6 @@
 # Security Group ECS
 resource "aws_security_group" "ecs_sg" {
-  name        = "ecs-sg"
+  name        = "sb-java-ecs-sg"
   description = "Allow ECS internal"
   vpc_id      = aws_vpc.main.id
   ingress {
@@ -20,13 +20,13 @@ resource "aws_security_group" "ecs_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "ecs-sg"
+    Name = "sb-java-ecs-sg"
   }
 }
 
 # Security Group Application Load Balancer
 resource "aws_security_group" "alb_sg" {
-  name        = "alb-sg"
+  name        = "sb-java-alb-sg"
   description = "Load balancer sg - public traffic allowed"
   vpc_id      = aws_vpc.main.id
   ingress {
@@ -48,6 +48,6 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "alb-sg"
+    Name = "sb-java-alb-sg"
   }
 }

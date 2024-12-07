@@ -1,14 +1,14 @@
 # ECS Cluster
 resource "aws_ecs_cluster" "app_test" {
-  name = "app-test"
+  name = "sb-java-app-cluster"
   tags = {
-    Name = "app-test"
+    Name = "sb-java-app-cluster"
   }
 }
 
 # ECS Frontend Task Definition
 resource "aws_ecs_task_definition" "frontend_task" {
-  family                   = "frontend-task"
+  family                   = "sb-java-frontend-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -26,20 +26,20 @@ resource "aws_ecs_task_definition" "frontend_task" {
     }]
   }])
   tags = {
-    Name = "frontend-task"
+    Name = "sb-java-frontend-task"
   }
 }
 
 # ECS Backend Task Definition
 resource "aws_ecs_task_definition" "backend_task" {
-  family                   = "backend-task"
+  family                   = "sb-java-backend-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "512"
   memory                   = "1024"
   container_definitions    = jsonencode([{
-    name      = "backend-container"
+    name      = "sb-java-backend-container"
     image     = "public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest"
     cpu       = 256
     memory    = 512
@@ -50,13 +50,13 @@ resource "aws_ecs_task_definition" "backend_task" {
     }]
   }])
   tags = {
-    Name = "backend-task"
+    Name = "sb-java-backend-task"
   }
 }
 
 # ECS Service Frontend
 resource "aws_ecs_service" "frontend_service" {
-  name            = "frontend-service"
+  name            = "sb-java-frontend-service"
   cluster         = aws_ecs_cluster.app_test.id
   task_definition = aws_ecs_task_definition.frontend_task.arn
   desired_count   = 1
@@ -68,18 +68,18 @@ resource "aws_ecs_service" "frontend_service" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.frontend_tg.arn
-    container_name   = "frontend-container"
+    container_name   = "sb-java-frontend-container"
     container_port   = 80
   }
   depends_on = [ aws_ecs_task_definition.frontend_task ]
   tags = {
-    Name = "frontend-service"
+    Name = "sb-java-frontend-service"
   }
 }
 
 # ECS Service Backend
 resource "aws_ecs_service" "backend_service" {
-  name            = "backend-service"
+  name            = "sb-java-backend-service"
   cluster         = aws_ecs_cluster.app_test.id
   task_definition = aws_ecs_task_definition.backend_task.arn
   desired_count   = 1
@@ -91,11 +91,11 @@ resource "aws_ecs_service" "backend_service" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.frontend_tg.arn
-    container_name   = "backend-container"
+    container_name   = "sb-java-backend-container"
     container_port   = 80
   }
   depends_on = [ aws_ecs_task_definition.frontend_task ]
   tags = {
-    Name = "backend-service"
+    Name = "sb-java-backend-service"
   }
 }

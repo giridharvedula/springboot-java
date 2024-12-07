@@ -13,7 +13,7 @@ resource "aws_route_table" "public" {
     }
   ]
   tags = {
-    Name = "rtb-public"
+    Name = "sb-java-rtb-public"
   }
 }
 
@@ -32,7 +32,7 @@ resource "aws_route_table_association" "public_association_2" {
 resource "aws_route_table" "private1_us_east_1a" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "rtb-private1-us-east-1a"
+    Name = "sb-java-rtb-pvt-us-east-1a"
   }
 }
 
@@ -46,7 +46,7 @@ resource "aws_route_table_association" "private1_association" {
 resource "aws_route_table" "private2_us_east_1b" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "rtb-private2-us-east-1b"
+    Name = "sb-java-rtb-pvt-us-east-1b"
   }
 }
 

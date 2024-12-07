@@ -4,7 +4,7 @@ resource "aws_vpc" "main" {
   enable_dns_support = true
   enable_dns_hostnames = true
   tags = {
-    Name = "main-vpc"
+    Name = "sb-java-vpc"
   }
 }
 
@@ -15,7 +15,7 @@ resource "aws_subnet" "private1_us_east_1a" {
   availability_zone = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = false
   tags = {
-    Name = "subnet-private1-us-east-1a"
+    Name = "sb-java-subnet-pvt-us-east-1a"
   }
 }
 
@@ -25,7 +25,7 @@ resource "aws_subnet" "private2_us_east_1b" {
   availability_zone = data.aws_availability_zones.available.names[1]
   map_public_ip_on_launch = false
   tags = {
-    Name = "subnet-private2-us-east-1b"
+    Name = "sb-java-subnet-pvt-us-east-1b"
   }
 }
 
@@ -35,7 +35,7 @@ resource "aws_subnet" "public1_us_east_1a" {
   availability_zone = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true
   tags = {
-    Name = "subnet-public1-us-east-1a"
+    Name = "sb-java-subnet-pub-us-east-1a"
   }
 }
 
@@ -45,7 +45,7 @@ resource "aws_subnet" "public2_us_east_1b" {
   availability_zone = data.aws_availability_zones.available.names[1]
   map_public_ip_on_launch = true
   tags = {
-    Name = "subnet-public2-us-east-1b"
+    Name = "sb-java-subnet-pub-us-east-1b"
   }
 }
 
@@ -53,6 +53,6 @@ resource "aws_subnet" "public2_us_east_1b" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "igw"
+    Name = "sb-java-igw"
   }
 }
