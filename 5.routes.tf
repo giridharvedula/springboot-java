@@ -18,7 +18,7 @@ resource "aws_route_table" "public" {
       vpc_peering_connection_id = null
     },
     {
-      cidr_block = "10.0.0.0/20"
+      cidr_block = "10.0.0.0/16"
       local_gateway_id = "local"
       gateway_id = null
       destination_prefix_list_id = null
