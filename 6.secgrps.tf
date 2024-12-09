@@ -7,21 +7,27 @@ resource "aws_security_group" "ecs_sg" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = [
-      "10.0.128.0/20",
-      "10.0.144.0/20"
-    ]
+    cidr_blocks = ["10.0.128.0/20"]
+    description = "sb-java-subnet-pvt-us-east-1a"
+  }
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.144.0/20"]
+    description = "sb-java-subnet-pvt-us-east-1b"
   }
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "ECR to ECS Pull Images and other required services communicate"
   }
   tags = {
     Name = "sb-java-ecs-sg"
   }
-  depends_on = [ aws_vpc.main ]
+  depends_on = [aws_vpc.main]
 }
 
 # Security Group Application Load Balancer
@@ -34,21 +40,24 @@ resource "aws_security_group" "alb_sg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTP"
   }
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS"
   }
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow all outbound traffic"
   }
   tags = {
     Name = "sb-java-alb-sg"
   }
-  depends_on = [ aws_vpc.main ]
+  depends_on = [aws_vpc.main]
 }
