@@ -1,15 +1,15 @@
 # ECS Cluster
 resource "aws_ecs_cluster" "app_test" {
-  name = "sb-java-app-cluster"
+  name = "sb-app-cluster"
   tags = {
-    Name = "sb-java-app-cluster"
+    Name = "sb-app-cluster"
   }
   depends_on = [ aws_ecr_repository.frontend, aws_ecr_repository.backend ]
 }
 
 # ECS Frontend Task Definition
 resource "aws_ecs_task_definition" "frontend_task" {
-  family                   = "sb-java-frontend-task"
+  family                   = "sb-frontend-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -27,14 +27,14 @@ resource "aws_ecs_task_definition" "frontend_task" {
     }]
   }])
   tags = {
-    Name = "sb-java-frontend-task"
+    Name = "sb-frontend-task"
   }
   depends_on = [ aws_ecr_repository.frontend ]
 }
 
 # ECS Backend Task Definition
 resource "aws_ecs_task_definition" "backend_task" {
-  family                   = "sb-java-backend-task"
+  family                   = "sb-backend-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -52,14 +52,14 @@ resource "aws_ecs_task_definition" "backend_task" {
     }]
   }])
   tags = {
-    Name = "sb-java-backend-task"
+    Name = "sb-backend-task"
   }
   depends_on = [ aws_ecr_repository.backend ]
 }
 
 # ECS Service Frontend
 resource "aws_ecs_service" "frontend_service" {
-  name            = "sb-java-frontend-service"
+  name            = "sb-frontend-service"
   cluster         = aws_ecs_cluster.app_test.id
   task_definition = aws_ecs_task_definition.frontend_task.arn
   desired_count   = 1
@@ -76,13 +76,13 @@ resource "aws_ecs_service" "frontend_service" {
   }
   depends_on = [ aws_ecs_task_definition.frontend_task ]
   tags = {
-    Name = "sb-java-frontend-service"
+    Name = "sb-frontend-service"
   }
 }
 
 # ECS Service Backend
 resource "aws_ecs_service" "backend_service" {
-  name            = "sb-java-backend-service"
+  name            = "sb-backend-service"
   cluster         = aws_ecs_cluster.app_test.id
   task_definition = aws_ecs_task_definition.backend_task.arn
   desired_count   = 1
@@ -99,6 +99,6 @@ resource "aws_ecs_service" "backend_service" {
   }
   depends_on = [ aws_ecs_task_definition.frontend_task ]
   tags = {
-    Name = "sb-java-backend-service"
+    Name = "sb-backend-service"
   }
 }

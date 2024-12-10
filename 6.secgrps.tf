@@ -1,6 +1,6 @@
 # Security Group ECS
 resource "aws_security_group" "ecs_sg" {
-  name        = "sb-java-ecs-sg"
+  name        = "sb-ecs-ecr-sg"
   description = "Allow ECS internal"
   vpc_id      = aws_vpc.main.id
   ingress {
@@ -8,14 +8,14 @@ resource "aws_security_group" "ecs_sg" {
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["10.0.128.0/20"]
-    description = "sb-java-subnet-pvt-us-east-1a"
+    description = "sb-subnet-pvt-us-east-1a"
   }
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["10.0.144.0/20"]
-    description = "sb-java-subnet-pvt-us-east-1b"
+    description = "sb-subnet-pvt-us-east-1b"
   }
   egress {
     from_port   = 0
@@ -25,14 +25,14 @@ resource "aws_security_group" "ecs_sg" {
     description = "ECR to ECS Pull Images and other required services communicate"
   }
   tags = {
-    Name = "sb-java-ecs-sg"
+    Name = "sb-ecs-ecr-sg"
   }
   depends_on = [aws_vpc.main]
 }
 
 # Security Group Application Load Balancer
 resource "aws_security_group" "alb_sg" {
-  name        = "sb-java-alb-sg"
+  name        = "sb-alb-sg"
   description = "Load balancer sg - public traffic allowed"
   vpc_id      = aws_vpc.main.id
   ingress {
@@ -57,7 +57,7 @@ resource "aws_security_group" "alb_sg" {
     description = "Allow all outbound traffic"
   }
   tags = {
-    Name = "sb-java-alb-sg"
+    Name = "sb-alb-sg"
   }
   depends_on = [aws_vpc.main]
 }

@@ -1,7 +1,7 @@
 
 # Target Group Frontend
 resource "aws_lb_target_group" "frontend_tg" {
-  name        = "sb-java-frontend-tg"
+  name        = "sb-frontend-tg"
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
@@ -11,14 +11,14 @@ resource "aws_lb_target_group" "frontend_tg" {
     path     = "/"
   }
   tags = {
-    Name = "sb-java-frontend-tg"
+    Name = "sb-frontend-tg"
   }
   depends_on = [ aws_vpc.main ]
 }
 
 # Target Group Backend
 resource "aws_lb_target_group" "backend_tg" {
-  name        = "sb-java-backend-tg"
+  name        = "sb-backend-tg"
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
@@ -28,14 +28,14 @@ resource "aws_lb_target_group" "backend_tg" {
     path     = "/"
   }
   tags = {
-    Name = "sb-java-backend-tg"
+    Name = "sb-backend-tg"
   }
   depends_on = [ aws_lb_target_group.frontend_tg ]
 }
 
 # Load Balancer - Scheme
 resource "aws_lb" "app_alb" {
-  name               = "sb-java-app-alb"
+  name               = "sb-app-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
@@ -45,7 +45,7 @@ resource "aws_lb" "app_alb" {
   ]
   enable_deletion_protection = false
   tags = {
-    Name = "sb-java-app-alb"
+    Name = "sb-app-alb"
   }
 }
 
@@ -75,7 +75,7 @@ resource "aws_lb_listener" "http_listener" {
     target_group_arn = aws_lb_target_group.frontend_tg.arn
   }
   tags = {
-    Name = "sb-java-http-listener"
+    Name = "sb-http-listener"
   }
   depends_on = [ aws_lb.app_alb ]
 }

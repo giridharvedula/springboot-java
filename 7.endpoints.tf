@@ -21,7 +21,7 @@ resource "aws_vpc_endpoint" "s3" {
     ]
   })
   tags = {
-    Name = "sb-java-vpce-s3-endpoint"
+    Name = "sb-vpce-s3"
   }
   depends_on = [ aws_route_table.private1_us_east_1a, aws_route_table.private2_us_east_1b ]
 }
@@ -50,7 +50,7 @@ resource "aws_vpc_endpoint" "ecr_api" {
     ]
   })
   tags = {
-    Name = "sb-java-vpce-ecr-api"
+    Name = "sb-vpce-ecr-api"
   }
   depends_on = [ aws_route_table.private1_us_east_1a, aws_route_table.private2_us_east_1b ]
 }
@@ -78,7 +78,7 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
     ]
   })
   tags = {
-    Name = "sb-java-vpce-ecr-dkr"
+    Name = "sb-vpce-ecr-dkr"
   }
   depends_on = [ aws_route_table.private1_us_east_1a, aws_route_table.private2_us_east_1b ]
 }

@@ -2,14 +2,14 @@
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "sb-java-rtb-pub"
+    Name = "sb-rtb-pub"
   }
 }
 
 resource "aws_route" "public" {
   route_table_id         = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.gw.id
+  gateway_id             = aws_internet_gateway.igw.id
   depends_on             = [aws_route_table.public, aws_internet_gateway.gw]
 }
 
@@ -30,7 +30,7 @@ resource "aws_route_table_association" "public_association_2" {
 resource "aws_route_table" "private1_us_east_1a" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "sb-java-rtb-pvt-us-east-1a"
+    Name = "sb-rtb-pvt-us-east-1a"
   }
   depends_on = [aws_vpc.main]
 }
@@ -46,7 +46,7 @@ resource "aws_route_table_association" "private1_association" {
 resource "aws_route_table" "private2_us_east_1b" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "sb-java-rtb-pvt-us-east-1b"
+    Name = "sb-rtb-pvt-us-east-1b"
   }
   depends_on = [aws_vpc.main]
 }
